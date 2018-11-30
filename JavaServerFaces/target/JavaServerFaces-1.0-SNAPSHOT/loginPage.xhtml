@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Login Page</title>
+    <script type="text/javascript">
+        window.location.hash="no-back-button";
+        window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+        window.onhashchange=function(){window.location.hash="no-back-button";}
+    </script>
+</h:head>
+
+<h3> Login </h3>
+<h:body>
+    <h:form>
+        <p:growl id="messages" autoUpdate="true"/>
+        <p:messages autoUpdate="true"/>
+        <br/>
+        <h:selectOneRadio value="#{managedBeanClass.userType}">
+            <f:selectItem itemValue="welcomeUser" itemLabel="User"/>
+            <f:selectItem itemValue="welcomeAdmin" itemLabel="Admin"/>
+        </h:selectOneRadio>
+        <br/>
+
+        <p:panelGrid columns="2">
+        <h:outputLabel>UserId</h:outputLabel>
+        <h:inputText id="userId" value="#{managedBeanClass.userId}" required="true"
+                     requiredMessage="User ID is required">
+            <f:validateLength minimum="5" maximum="5" />
+        </h:inputText>
+        <h:outputLabel>Password</h:outputLabel>
+        <h:inputSecret id="password" value="#{managedBeanClass.password}" required="true"
+                     requiredMessage="Password is required"/>
+
+        </p:panelGrid >
+        <br/>
+        <h:commandButton value="Login" action="#{managedBeanClass.checkLogin}"/>
+        <br/>
+        <br/>
+        <br/>
+        <p:link value = "Not Registered???" outcome = "registeration" />
+        <h:outputLabel value="#{param['fname']}" style="color:red"/>
+        <br/>
+        <br/>
+        <h:outputLabel value="#{param['kname']}" style="color:black"/>
+        <br/>
+
+    </h:form>
+</h:body>
+
+</html>
